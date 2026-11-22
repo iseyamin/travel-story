@@ -9,8 +9,16 @@ function App() {
   return (
     <>
       <Navbar></Navbar>
-
-      <Blogs></Blogs>
+     
+     <div className="main-container flex text-center">
+      <div className="left-container w-[65%]">
+           <Blogs></Blogs>
+      </div>
+      <div className="right-container w-[35%]">
+         <h2>Reading time: 0</h2>
+         <h2>Bookmark: 0</h2>
+      </div>
+     </div>
     </>
   )
 }
