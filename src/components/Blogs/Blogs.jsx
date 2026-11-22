@@ -1,13 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import Blog from '../Blog/Blog';
 
-const Blogs = () => {
-    const[blogs, setBlogs]=useState([]);
-    useEffect(()=>{
-        fetch('blogs.json')
-        .then(res=>res.json())
-        .then(data=>setBlogs(data))
-    },[])
+const Blogs = ({blogs, handleBookmark}) => {
+    // const[blogs, setBlogs]=useState([]);
+    // useEffect(()=>{
+    //     fetch('blogs.json')
+    //     .then(res=>res.json())
+    //     .then(data=>{
+    //         setBlogs(data)
+    //     receiveBlogs(blogs)
+    //     })
+    // },[])
+    
 
     console.log(blogs);
 
@@ -16,11 +20,12 @@ const Blogs = () => {
             <h1 className='text-3xl'>Available Blogs: {blogs.length}</h1>
             <div className="all-blog grid lg:grid-cols-2 gap-2">
                 {
-                    blogs.map(blog=> <Blog key={blog.id} blog={blog}></Blog>)
+                    blogs.map(blog=> <Blog 
+                        key={blog.id} blog={blog} handleBookmark={handleBookmark}></Blog>) 
                 }
             </div>
         </div>
     );
 };
 
-export default Blogs;
+export default Blogs
