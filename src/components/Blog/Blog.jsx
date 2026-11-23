@@ -2,7 +2,7 @@ import React from 'react';
 import { CiBookmarkPlus } from "react-icons/ci";
 import { add } from '../../utilities/utility';
 
-const Blog = ({blog, handleBookmark}) => {
+const Blog = ({blog, handleBookmark, removeBook}) => {
     const{title,placeimg,author,authorimg,place,story,tags,id}=blog;
     //console.log(blog)
     return (
@@ -28,7 +28,7 @@ const Blog = ({blog, handleBookmark}) => {
       }
     </ul>
     <div className="card-actions justify-end">
-      <button className="btn btn-primary">mark as read</button>
+      <button onClick={()=>removeBook(blog.id)} className="btn btn-primary">mark as read</button>
     </div>
   </div>
 </div>

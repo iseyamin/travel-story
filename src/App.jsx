@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import './App.css'
 import Blogs from './components/Blogs/Blogs'
 import Navbar from './components/Navbar/Navbar'
-import { add, get } from './utilities/utility';
+import { add, get, remove } from './utilities/utility';
 
 function App() {
   const[blogs, setBlogs]=useState([]);
@@ -44,6 +44,18 @@ function App() {
   setBookmark(books);
 }, [blogs]);
 
+//remove item
+const removeBook=(id)=>{
+  remove(id);
+
+  const newBook=bookmark.filter(book=> book.id!==id);
+  setBookmark(newBook);
+  setCount(count+1)
+}
+//count read
+const[count, setCount]=useState(0);
+
+
   
 
   console.log(bookmark)
@@ -53,10 +65,10 @@ function App() {
      
      <div className="main-container flex text-center">
       <div className="left-container w-[65%]">
-           <Blogs blogs={blogs} handleBookmark={handleBookmark}></Blogs>
+           <Blogs blogs={blogs} handleBookmark={handleBookmark} removeBook={removeBook}></Blogs>
       </div>
       <div className="right-container w-[35%]">
-         <h2>Reading time: 0</h2>
+         <h2>Reading books: {count}</h2>
          <h2>Bookmark: {bookmark.length}</h2>
          {
           bookmark.map(item=><p>{item.title}</p>)
