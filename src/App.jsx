@@ -5,6 +5,7 @@ import Blogs from './components/Blogs/Blogs'
 import Navbar from './components/Navbar/Navbar'
 import { add, get, remove } from './utilities/utility';
 
+
 function App() {
   const[blogs, setBlogs]=useState([]);
     useEffect(()=>{
@@ -16,10 +17,16 @@ function App() {
     },[])
 
  const [bookmark, setBookmark] = useState([]);
-    const handleBookmark=(blog)=>{
-    setBookmark([...bookmark,blog])
-    add(blog.id)
-  }
+  //   const handleBookmark=(blog)=>{
+  //   setBookmark([...bookmark,blog])
+  //   add(blog.id)
+  // }
+  const handleBookmark = (blog) => {
+  if (bookmark.some(b => b.id === blog.id)) return;
+  setBookmark([...bookmark, blog]);
+  add(blog.id);
+};
+console.log(bookmark.map(b => b.id))
 
   //console.log(blogs)
   // useEffect(()=>{
@@ -55,13 +62,18 @@ const removeBook=(id)=>{
 //count read
 const[count, setCount]=useState(0);
 
+//read book
+const readBook=(item)=>{
+
+}
+
 
   
 
   console.log(bookmark)
   return (
     <>
-      <Navbar></Navbar>
+      <Navbar totalBook={bookmark}></Navbar>
      
      <div className="main-container flex text-center">
       <div className="left-container w-[65%]">
@@ -71,8 +83,14 @@ const[count, setCount]=useState(0);
          <h2>Reading books: {count}</h2>
          <h2>Bookmark: {bookmark.length}</h2>
          {
-          bookmark.map(item=><p>{item.title}</p>)
-         }
+  bookmark.map(item => (
+    <div key={item.id}>
+      <p>{item.title}</p>
+      
+    </div>
+  ))
+}
+         
       </div>
      </div>
     </>
